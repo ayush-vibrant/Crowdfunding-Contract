@@ -10,5 +10,5 @@ contract Crowdfunding {
         goal = _goal;
     }
 
-    // ...to be filled in soon...
+    // add withdrawl and claimFunds later.
 }
