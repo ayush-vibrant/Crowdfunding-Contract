@@ -25,7 +25,6 @@ contract Crowdfunding {
         require(address(this).balance >= goal); // funding goal met
         require(now >= deadline);               // in the withdrawal period
         require(msg.sender == owner);
-
         msg.sender.transfer(address(this).balance);
     }
 
