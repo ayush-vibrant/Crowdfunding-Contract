@@ -29,4 +29,13 @@ contract Crowdfunding {
         msg.sender.transfer(address(this).balance);
     }
 
+    // This function is for funders, i.e after the deadlines requried amount is not gathered so they can claim their money back.
+    function getRefund() public {
+        require(address(this).balance < goal);  // funding goal not met
+        require(now >= deadline);               // in the withdrawal period
+        uint256 amount = pledgeOf[msg.sender];
+        pledgeOf[msg.sender] = 0;
+        msg.sender.transfer(amount);
+}
+
 }
