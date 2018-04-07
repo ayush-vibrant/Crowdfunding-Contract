@@ -11,4 +11,22 @@ contract Crowdfunding {
     }
 
     // add withdrawl and claimFunds later.
+
+
+    //  During the fundraising period, the contract will accept pledges, but it will not allow withdrawals
+    function pledge(uint256 amount) public payable {
+        require(now < deadline);                // in the fundraising period
+        require(msg.value == amount);
+        pledgeOf[msg.sender] += amount;
+    }
+
+    // This function is for owner, i.e after the deadlines requried amount is gathered.
+    function claimFunds() public {
+        require(address(this).balance >= goal); // funding goal met
+        require(now >= deadline);               // in the withdrawal period
+        require(msg.sender == owner);
+
+        msg.sender.transfer(address(this).balance);
+    }
+
 }
